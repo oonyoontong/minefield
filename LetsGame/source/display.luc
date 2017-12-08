@@ -1,0 +1,31 @@
+module display (
+    input clk,  // clock
+    input rst,  // reset
+    input red[5][7],
+    input green[5][7],
+    output r_red[7],
+    output c_red[5],
+    output r_green[7],
+    output c_green[5]
+  ) {
+  const FLIP = 16;
+  counter counter_r (.clk(clk),.rst(rst),#SIZE(3), #DIV(FLIP), #TOP(6));
+  sig whichrow[3];
+  var i;
+
+  always {
+    r_red = b0000000;
+    c_red = b11111;
+    r_green = b0000000;
+    c_green = b11111;
+    
+    whichrow = counter_r.value;
+    r_red[whichrow] = 1;
+    r_green[whichrow] = 1;
+    for (i = 0; i <=4; i++) {
+      c_red[i] = ~red[i][6-whichrow];
+      c_green[i] = ~green[i][6-whichrow];
+    }
+    
+  }
+}

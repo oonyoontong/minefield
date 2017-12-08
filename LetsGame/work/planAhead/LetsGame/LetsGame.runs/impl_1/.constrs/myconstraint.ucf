@@ -1,0 +1,139 @@
+NET "r_red[0]" LOC = P98;
+NET "r_red[0]" IOSTANDARD = LVTTL;
+NET "r_red[1]" LOC = P58;
+NET "r_red[1]" IOSTANDARD = LVTTL;
+NET "r_red[2]" LOC = P81;
+NET "r_red[2]" IOSTANDARD = LVTTL;
+NET "r_red[3]" LOC = P99;
+NET "r_red[3]" IOSTANDARD = LVTTL;
+NET "r_red[4]" LOC = P94;
+NET "r_red[4]" IOSTANDARD = LVTTL;
+NET "r_red[5]" LOC = P104;
+NET "r_red[5]" IOSTANDARD = LVTTL;
+NET "r_red[6]" LOC = P78;
+NET "r_red[6]" IOSTANDARD = LVTTL;
+
+
+NET "c_red[0]" LOC = P66;
+NET "c_red[0]" IOSTANDARD = LVTTL;
+NET "c_red[1]" LOC = P82;
+NET "c_red[1]" IOSTANDARD = LVTTL;
+NET "c_red[2]" LOC = P87;
+NET "c_red[2]" IOSTANDARD = LVTTL;
+NET "c_red[3]" LOC = P93;
+NET "c_red[3]" IOSTANDARD = LVTTL;
+NET "c_red[4]" LOC = P102;
+NET "c_red[4]" IOSTANDARD = LVTTL;
+
+
+NET "r_green[0]" LOC = P100;
+NET "r_green[0]" IOSTANDARD = LVTTL;
+NET "r_green[1]" LOC = P67;
+NET "r_green[1]" IOSTANDARD = LVTTL;
+NET "r_green[2]" LOC = P83;
+NET "r_green[2]" IOSTANDARD = LVTTL;
+NET "r_green[3]" LOC = P97;
+NET "r_green[3]" IOSTANDARD = LVTTL;
+NET "r_green[4]" LOC = P92;
+NET "r_green[4]" IOSTANDARD = LVTTL;
+NET "r_green[5]" LOC = P101;
+NET "r_green[5]" IOSTANDARD = LVTTL;
+NET "r_green[6]" LOC = P74;
+NET "r_green[6]" IOSTANDARD = LVTTL;
+
+
+NET "c_green[0]" LOC = P57;
+NET "c_green[0]" IOSTANDARD = LVTTL;
+NET "c_green[1]" LOC = P80;
+NET "c_green[1]" IOSTANDARD = LVTTL;
+NET "c_green[2]" LOC = P84;
+NET "c_green[2]" IOSTANDARD = LVTTL;
+NET "c_green[3]" LOC = P95;
+NET "c_green[3]" IOSTANDARD = LVTTL;
+NET "c_green[4]" LOC = P105;
+NET "c_green[4]" IOSTANDARD = LVTTL;
+
+NET "up" LOC = P112;
+NET "up" IOSTANDARD = LVTTL;
+NET "up" PULLUP;
+NET "down" LOC = P115;
+NET "down" IOSTANDARD = LVTTL;
+NET "down" PULLUP;
+NET "left" LOC = P117;
+NET "left" IOSTANDARD = LVTTL;
+NET "left" PULLUP;
+NET "right" LOC = P119;
+NET "right" IOSTANDARD = LVTTL;
+NET "right" PULLUP;
+NET "confirm" LOC = P111;
+NET "confirm" IOSTANDARD = LVTTL;
+NET "confirm" PULLUP;
+NET "myreset" LOC = P114;
+NET "myreset" IOSTANDARD = LVTTL;
+NET "myreset" PULLUP;
+
+NET "digitout_score[0]" LOC = P41;
+NET "digitout_score[0]" IOSTANDARD = LVTTL;
+NET "digitout_score[1]" LOC = P27;
+NET "digitout_score[1]" IOSTANDARD = LVTTL;
+NET "digitout_score[2]" LOC = P32;
+NET "digitout_score[2]" IOSTANDARD = LVTTL;
+NET "digitout_score[3]" LOC = P40;
+NET "digitout_score[3]" IOSTANDARD = LVTTL;
+NET "digitout_score[4]" LOC = P50;
+NET "digitout_score[4]" IOSTANDARD = LVTTL;
+NET "digitout_score[5]" LOC = P35;
+NET "digitout_score[5]" IOSTANDARD = LVTTL;
+NET "digitout_score[6]" LOC = P29;
+NET "digitout_score[6]" IOSTANDARD = LVTTL;
+NET "digitout_score[7]" LOC = P34;
+NET "digitout_score[7]" IOSTANDARD = LVTTL;
+
+NET "selectdigit_score[0]" LOC = P26;
+NET "selectdigit_score[0]" IOSTANDARD = LVTTL;
+NET "selectdigit_score[1]" LOC = P30;
+NET "selectdigit_score[1]" IOSTANDARD = LVTTL;
+NET "selectdigit_score[2]" LOC = P33;
+NET "selectdigit_score[2]" IOSTANDARD = LVTTL;
+NET "selectdigit_score[3]" LOC = P51;
+NET "selectdigit_score[3]" IOSTANDARD = LVTTL;
+
+NET "digitout_time_ge[0]" LOC = P2;
+NET "digitout_time_ge[0]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[1]" LOC = P144;
+NET "digitout_time_ge[1]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[2]" LOC = P1;
+NET "digitout_time_ge[2]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[3]" LOC = P7;
+NET "digitout_time_ge[3]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[4]" LOC = P9;
+NET "digitout_time_ge[4]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[5]" LOC = P8;
+NET "digitout_time_ge[5]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[6]" LOC = P10;
+NET "digitout_time_ge[6]" IOSTANDARD = LVTTL;
+NET "digitout_time_ge[7]" LOC = P143;
+NET "digitout_time_ge[7]" IOSTANDARD = LVTTL;
+NET "ge_control" LOC = P5;
+NET "ge_control" IOSTANDARD = LVTTL;
+
+NET "digitout_time_shi[0]" LOC = P15;
+NET "digitout_time_shi[0]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[1]" LOC = P12;
+NET "digitout_time_shi[1]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[2]" LOC = P14;
+NET "digitout_time_shi[2]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[3]" LOC = P21;
+NET "digitout_time_shi[3]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[4]" LOC = P23;
+NET "digitout_time_shi[4]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[5]" LOC = P22;
+NET "digitout_time_shi[5]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[6]" LOC = P24;
+NET "digitout_time_shi[6]" IOSTANDARD = LVTTL;
+NET "digitout_time_shi[7]" LOC = P11;
+NET "digitout_time_shi[7]" IOSTANDARD = LVTTL;
+NET "shi_control" LOC = P16;
+NET "shi_control" IOSTANDARD = LVTTL;
+
+

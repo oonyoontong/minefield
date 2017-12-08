@@ -1,0 +1,32 @@
+module animation (
+    input clk,  // clock
+    input rst,  // reset
+    output out_mine[5][7],
+    output out_win[5][7]
+  ) {
+  
+  sig mine[5][26];
+  sig win[5][40];
+  const FLIP = 24;
+  counter counter_mine (.clk(clk),.rst(rst), #SIZE($clog2(25)),#TOP(25),#DIV(FLIP));
+  counter counter_win (.clk(clk),.rst(rst), #SIZE($clog2(39)),#TOP(39),#DIV(FLIP));
+  var i; 
+  always {
+    mine = {
+    b01101100111010001011100000,
+    b10010010010011001010000000,
+    b10010010010010101011100000,
+    b10010010010010011010000000,
+    b10010010111010001011100000};
+    win = {
+    b1000100110010010001001001011101000100000,
+    b1000101001010010001001001001001100100000,
+    b0101001001010010001001001001001010100000,
+    b0010001001010010001001001001001001100000,
+    b0010000110001100000110110011101000100000};
+    for (i = 0; i < 5; i++){
+      out_mine[i] = mine[i] << counter_mine.value| mine[i]>>(26 - counter_mine.value);
+      out_win[i] =  win[i] << counter_win.value | win[i] >>(40- counter_win.value);
+    }
+  }
+}

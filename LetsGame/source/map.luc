@@ -1,0 +1,626 @@
+module map (
+    //input clk,  // clock
+    //input rst,  // reset
+    input number[6],
+    output map_mine[5][7],
+    output map_bonus[5][7],
+    output start_row[3],
+    output start_col[3],
+    output end_row[3],
+    output end_col[3],
+    output bound_left[3],
+    output bound_right[3],
+    output bound_up[3],
+    output bount_down[3],
+    output boundary[5][7]   
+  ) {
+
+  always {
+    boundary = {b1111111,b1000001,b1000001,b1000001,b1000001};
+    if (number < 32) {
+      bound_left = 5;
+      bound_right = 1;
+      bound_up = 3;
+      bount_down = 0;
+    } else {
+      bound_left = 6;
+      bound_right = 0;
+      bound_up = 4;
+      bount_down = 0;
+    }
+    case (number) {
+
+      0: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000100};
+
+        map_mine = {b0000000,
+                  b0001000,
+                  b0010000,
+                  b0000010,
+                  b0000000};
+        start_row = 3;
+        start_col = 4;
+        end_row = 3;
+        end_col = 2;
+
+
+      1: map_bonus ={b0000000,
+                    b0000000,
+                    b0100000,
+                    b0000000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0001000,
+                  b0000000,
+                  b0010010,
+                  b0000010};
+        start_row = 2;
+        start_col = 3;
+        end_row = 0;
+        end_col = 5;
+
+
+      2: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0100000,
+                  b0000X00,
+                  b0000000,
+                  b0110000};
+        start_row = 0;
+        start_col = 1;
+        end_row = 3;
+        end_col = 2;
+
+
+      3: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000}; 
+
+        map_mine = {b0000000,
+                  b0001010,
+                  b0001000,
+                  b0010000,
+                  b0000000};
+        start_row = 1;
+        start_col = 3;
+        end_row = 2;
+        end_col = 4;
+
+
+      4: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0001000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0000000,
+                  b0100010,
+                  b0000100,
+                  b0000000};
+        start_row = 1;
+        start_col = 5;
+        end_row = 2;
+        end_col = 2;
+
+
+      5: map_bonus ={b0000000,
+                    b0000000,
+                    b0001000,
+                    b0000000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0110000,
+                  b0000000,
+                  b0100100,
+                  b0000000};
+        start_row = 2;
+        start_col = 4;
+        end_row = 0;
+        end_col = 2;
+
+
+      6: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000}; 
+
+        map_mine = {b0000000,
+                  b0000100,
+                  b1000100,
+                  b0000000,
+                  b0000000};
+        start_row = 3;
+        start_col = 4;
+        end_row = 1;
+        end_col = 5;
+
+
+      7: map_bonus ={b0000000,
+                    b0000000,
+                    b0001000,
+                    b0000000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0110000,
+                  b0000000,
+                  b0100000,
+                  b0000000};
+        start_row = 2;
+        start_col = 5;
+        end_row = 0;
+        end_col = 3;
+
+      8: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000010,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0000100,
+                  b0001000,
+                  b0000000,
+                  b0100000};
+        start_row = 2;
+        start_col = 5;
+        end_row = 2;
+        end_col = 1;
+
+      9: map_bonus ={b0000000,
+                    b0000000,
+                    b0001000,
+                    b0000000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0110000,
+                  b0000000,
+                  b0010000,
+                  b0000000};
+        start_row = 3;
+        start_col = 1;
+        end_row = 0;
+        end_col = 1;
+
+
+      10: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000}; 
+
+        map_mine = {b0000000,
+                  b0001000,
+                  b0001000,
+                  b0000000,
+                  b0001000};
+        start_row = 2;
+        start_col = 1;
+        end_row = 2;
+        end_col = 5;
+
+
+
+      11: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000100}; 
+
+        map_mine = {b0000000,
+                  b0010000,
+                  b0000010,
+                  b0000000,
+                  b0100000};
+        start_row = 2;
+        start_col = 5;
+        end_row = 3;
+        end_col = 2;
+
+
+
+      12: map_bonus ={b0000000,
+                    b0000000,
+                    b0100000,
+                    b0000000,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0010000,
+                  b0000000,
+                  b0101000,
+                  b0001000};
+        start_row = 3;
+        start_col = 5;
+        end_row = 1;
+        end_col = 2;
+
+
+
+      13: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000}; 
+
+        map_mine = {b0000000,
+                  b0100000,
+                  b0010000,
+                  b0000100,
+                  b0000000};
+        start_row = 1;
+        start_col = 3;
+        end_row = 2;
+        end_col = 5;
+
+
+      14: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000100,
+                    b0000000}; 
+
+        map_mine = {b0000000,
+                  b0001000,
+                  b0000100,
+                  b0110000,
+                  b0000000};
+        start_row = 3;
+        start_col = 4;
+        end_row = 2;
+        end_col = 1;
+
+
+
+      15: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000100}; 
+
+        map_mine = {b0000000,
+                  b0001000,
+                  b0000100,
+                  b0000000,
+                  b0000010};
+        start_row = 3;
+        start_col = 5;
+        end_row = 3;
+        end_col = 1;
+        
+        
+        16: map_bonus ={b0000000,
+                    b0000000,
+                    b0001000,
+                    b0000000,
+                    b0000000};
+        map_mine={b0000000,
+                  b0010000,
+                  b0010000,
+                  b0000000,
+                  b0000000};
+        
+        start_row = 0;
+        start_col = 5;
+        end_row = 3;
+        end_col = 1;
+
+
+
+
+
+
+      32: map_bonus ={b0000100,
+                    b0000000,
+                    b0000000,
+                    b1000000,
+                    b0000000};
+
+        map_mine = {b1000000,
+                  b0000010,
+                  b0001000,
+                  b0110000,
+                  b0000000};
+        start_row = 4;
+        start_col = 3;
+        end_row = 0;
+        end_col = 3;
+
+
+
+      33: map_bonus ={b0000000,
+                    b1000100,
+                    b0000000,
+                    b0000000,
+                    b0000000};
+
+        map_mine = {b0100000,
+                  b0100000,
+                  b0010010,
+                  b0010000,
+                  b0000000};
+        start_row = 4;
+        start_col = 6;
+        end_row = 4;
+        end_col = 2;
+
+
+      34: map_bonus ={b0000000,
+                    b0000100,
+                    b0000000,
+                    b0100000,
+                    b0000000};
+
+        map_mine = {b0010000,
+                  b0001000,
+                  b0100010,
+                  b0000000,
+                  b0100000};
+        start_row = 0;
+        start_col = 2;
+        end_row = 3;
+        end_col = 4;
+
+
+      35: map_bonus ={b0000000,
+                    b0000000,
+                    b0100100,
+                    b0000000,
+                    b0000000};
+
+        map_mine = {b0100000,
+                  b1000100,
+                  b0010000,
+                  b0000000,
+                  b0000100};
+        start_row = 4;
+        start_col = 3;
+        end_row = 1;
+        end_col = 5;
+
+
+
+      36: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100010,
+                    b0000000};
+
+        map_mine = {b1100000,
+                  b0000100,
+                  b0000000,
+                  b0000000,
+                  b1100000};
+        start_row = 2;
+        start_col = 3;
+        end_row = 4;
+        end_col = 2;
+
+
+
+      37: map_bonus ={b0100000,
+                    b0000000,
+                    b0000010,
+                    b0000000,
+                    b0000000};
+
+        map_mine = {b0000000,
+                  b0000100,
+                  b0100000,
+                  b0101000,
+                  b0000010};
+        start_row = 1;
+        start_col = 2;
+        end_row = 3;
+        end_col = 6;
+
+
+
+      38: map_bonus ={b0000000,
+                    b0001000,
+                    b0000000,
+                    b0000000,
+                    b0001000};
+
+        map_mine = {b1001000,
+                  b1100000,
+                  b0000000,
+                  b0010000,
+                  b0000000};
+        start_row = 0;
+        start_col = 5;
+        end_row = 2;
+        end_col = 3;
+
+
+      39: map_bonus ={b0000000,
+                    b0000100,
+                    b0000000,
+                    b0100000,
+                    b0000000};
+
+        map_mine = {b0010100,
+                  b0000000,
+                  b0010000,
+                  b1000000,
+                  b1110000};
+        start_row = 0;
+        start_col = 0;
+        end_row = 4;
+        end_col = 5;
+
+
+
+      40: map_bonus ={b0000010,
+                    b0000000,
+                    b0000000,
+                    b0000010,
+                    b0000000};
+
+        map_mine = {b1011000,
+                  b0000100,
+                  b0000000,
+                  b0000000,
+                  b0001000};
+        start_row = 4;
+        start_col = 2;
+        end_row = 3;
+        end_col = 5;
+
+
+      41: map_bonus ={b0000000,
+                    b0100000,
+                    b0000000,
+                    b0000000,
+                    b1000000};
+
+        map_mine = {b0000100,
+                  b0000000,
+                  b0101010,
+                  b0010000,
+                  b0000000};
+        start_row = 0;
+        start_col = 2;
+        end_row = 3;
+        end_col = 4;
+
+
+
+      42: map_bonus ={b0000000,
+                    b0000000,
+                    b0000000,
+                    b0010000,
+                    b1000000};
+
+        map_mine = {b0000000,
+                  b1000100,
+                  b0000000,
+                  b0001000,
+                  b0010001};
+        start_row = 0;
+        start_col = 3;
+        end_row = 4;
+        end_col = 6;
+
+
+      43: map_bonus ={b0100000,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000100};
+
+        map_mine = {b1010010,
+                  b0000100,
+                  b0000000,
+                  b0001000,
+                  b0000000};
+        start_row = 2;
+        start_col = 0;
+        end_row = 4;
+        end_col = 3;
+
+
+
+
+      44: map_bonus ={b0000000,
+                    b0000000,
+                    b0001000,
+                    b0100000,
+                    b0000000};
+
+        map_mine = {b0000000,
+                  b0100010,
+                  b0000000,
+                  b0000100,
+                  b0001100};
+        start_row = 2;
+        start_col = 4;
+        end_row = 0;
+        end_col = 0;
+
+
+      45: map_bonus ={b0000100,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0100000};
+
+        map_mine = {b0000000,
+                  b1001010,
+                  b0000000,
+                  b0000000,
+                  b1001000};
+        start_row = 0;
+        start_col = 1;
+        end_row = 4;
+        end_col = 6;
+
+
+
+      46: map_bonus ={b0001010,
+                    b0000000,
+                    b0000000,
+                    b0000000,
+                    b0000000};
+
+        map_mine = {b0000100,
+                  b0000000,
+                  b0100000,
+                  b0000000,
+                  b0001011};
+        start_row = 4;
+        start_col = 5;
+        end_row = 1;
+        end_col = 2;
+
+
+      47: map_bonus ={b0000000,
+                    b0000000,
+                    b1000010,
+                    b0000000,
+                    b0000000};
+
+        map_mine = {b0000100,
+                  b0010000,
+                  b0101000,
+                  b0100000,
+                  b0000000};
+        start_row = 4;
+        start_col = 1;
+        end_row = 0;
+        end_col = 0;
+
+
+    default: map_bonus ={b0000000,
+                         b0000000,
+                         b0000000,
+                         b0000000,
+                         b0000000};
+             map_mine ={b0000000,
+                        b0000000,
+                        b0000000,
+                        b0000000,
+                        b0000000};
+             start_row = 0;
+             start_col = 0;
+             end_row = 0;
+             end_col = 0;
+    
+    }
+  }
+}

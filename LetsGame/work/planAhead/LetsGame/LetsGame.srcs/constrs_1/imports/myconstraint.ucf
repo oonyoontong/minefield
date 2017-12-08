@@ -1,0 +1,73 @@
+NET "r_red<0>" LOC = P98 | IOSTANDARD = LVTTL;
+NET "r_red<1>" LOC = P58 | IOSTANDARD = LVTTL;
+NET "r_red<2>" LOC = P81 | IOSTANDARD = LVTTL;
+NET "r_red<3>" LOC = P99 | IOSTANDARD = LVTTL;
+NET "r_red<4>" LOC = P94 | IOSTANDARD = LVTTL;
+NET "r_red<5>" LOC = P104 | IOSTANDARD = LVTTL;
+NET "r_red<6>" LOC = P78 | IOSTANDARD = LVTTL;
+
+
+NET "c_red<0>" LOC = P66 | IOSTANDARD = LVTTL; 
+NET "c_red<1>" LOC = P82 | IOSTANDARD = LVTTL; 
+NET "c_red<2>" LOC = P87 | IOSTANDARD = LVTTL; 
+NET "c_red<3>" LOC = P93 | IOSTANDARD = LVTTL; 
+NET "c_red<4>" LOC = P102 | IOSTANDARD = LVTTL; 
+
+
+NET "r_green<0>" LOC = P100 | IOSTANDARD = LVTTL;
+NET "r_green<1>" LOC = P67 | IOSTANDARD = LVTTL;
+NET "r_green<2>" LOC = P83 | IOSTANDARD = LVTTL;
+NET "r_green<3>" LOC = P97 | IOSTANDARD = LVTTL;
+NET "r_green<4>" LOC = P92 | IOSTANDARD = LVTTL;
+NET "r_green<5>" LOC = P101 | IOSTANDARD = LVTTL;
+NET "r_green<6>" LOC = P74 | IOSTANDARD = LVTTL;
+
+
+NET "c_green<0>" LOC = P57 | IOSTANDARD = LVTTL; 
+NET "c_green<1>" LOC = P80 | IOSTANDARD = LVTTL;
+NET "c_green<2>" LOC = P84 | IOSTANDARD = LVTTL;
+NET "c_green<3>" LOC = P95 | IOSTANDARD = LVTTL;
+NET "c_green<4>" LOC = P105 | IOSTANDARD = LVTTL;
+
+NET "up" LOC = P112 | IOSTANDARD = LVTTL | PULLUP;
+NET "down" LOC = P115 | IOSTANDARD = LVTTL | PULLUP;
+NET "left" LOC = P117 | IOSTANDARD = LVTTL | PULLUP;
+NET "right" LOC = P119 | IOSTANDARD = LVTTL | PULLUP;
+NET "confirm" LOC = P111 | IOSTANDARD = LVTTL | PULLUP;
+NET "myreset" LOC = P114 | IOSTANDARD = LVTTL | PULLUP;
+
+NET "digitout_score<0>" LOC = P41 | IOSTANDARD = LVTTL;
+NET "digitout_score<1>" LOC = P27 | IOSTANDARD = LVTTL;
+NET "digitout_score<2>" LOC = P32 | IOSTANDARD = LVTTL;
+NET "digitout_score<3>" LOC = P40 | IOSTANDARD = LVTTL;
+NET "digitout_score<4>" LOC = P50 | IOSTANDARD = LVTTL;
+NET "digitout_score<5>" LOC = P35 | IOSTANDARD = LVTTL;
+NET "digitout_score<6>" LOC = P29 | IOSTANDARD = LVTTL;
+NET "digitout_score<7>" LOC = P34 | IOSTANDARD = LVTTL;
+
+NET "selectdigit_score<0>" LOC = P26 | IOSTANDARD = LVTTL;
+NET "selectdigit_score<1>" LOC = P30 | IOSTANDARD = LVTTL;
+NET "selectdigit_score<2>" LOC = P33 | IOSTANDARD = LVTTL;
+NET "selectdigit_score<3>" LOC = P51 | IOSTANDARD = LVTTL;
+
+NET "digitout_time_ge<0>" LOC = P2 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<1>" LOC = P144 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<2>" LOC = P1 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<3>" LOC = P7 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<4>" LOC = P9 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<5>" LOC = P8 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<6>" LOC = P10 | IOSTANDARD = LVTTL;
+NET "digitout_time_ge<7>" LOC = P143 | IOSTANDARD = LVTTL;
+NET "ge_control" LOC = P5 | IOSTANDARD = LVTTL;
+
+NET "digitout_time_shi<0>" LOC = P15 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<1>" LOC = P12 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<2>" LOC = P14 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<3>" LOC = P21 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<4>" LOC = P23 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<5>" LOC = P22 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<6>" LOC = P24 | IOSTANDARD = LVTTL;
+NET "digitout_time_shi<7>" LOC = P11 | IOSTANDARD = LVTTL;
+NET "shi_control" LOC = P16 | IOSTANDARD = LVTTL;
+
+

@@ -1,0 +1,249 @@
+module logic (
+    input clk,  // clock
+    input rst,  // reset
+    input up,
+    input down,
+    input left,
+    input right,
+    input confirm,
+    input myreset,
+    output outred[5][7],
+    output outgreen[5][7],
+    output outscores[$clog2(9999)],
+    output outtime[$clog2(199)]
+  ) 
+{
+  dff gclk[28](.clk(clk), .rst(rst), #INIT(0)); //GAME CLOCK
+  
+  dff path[5][7](.clk(clk), .rst(rst), #INIT(0));
+  //dff toDisplayRed[5][7](.clk(clk), .rst(rst), #INIT(0));
+  dff leftMines[5][7](.clk(clk), .rst(rst), #INIT(0));
+  pointonecounter timer(.clk(clk),.rst(rst));
+  dff map_number[6] (.clk(clk),.rst(rst), #INIT(0)); //!!!
+  dff round[4] (.clk(clk),.rst(rst),#INIT(0));
+  dff usedmap[6](.clk(clk),.rst(rst));
+  dff scores[$clog2(9999)](.clk(clk),.rst(rst));
+  dff counter_failscreen[3](.clk(clk),.rst(rst),#INIT(0));
+  fsm state(.clk(clk), #INIT(START)) = {START,SHOWROUND,SHOWMINE,RUNNING,FAIL,ROUNDSUC,FINALSUCCESS};
+
+  sig start_row[3];
+  sig start_col[3];
+  sig end_row[3];
+  sig end_col[3];
+  sig bound_left[3];
+  sig bound_right[3];
+  sig bound_up[3];
+  sig bound_down[3];
+  
+  dff now_position_row[3](.clk(clk), .rst(rst), #INIT(0));
+  dff now_position_col[3](.clk(clk), .rst(rst), #INIT(0));
+  select selectHelper(.clk(clk), .rst(rst));
+  select fasterselectHelper(.clk(clk),.rst(rst), #SPEED(25));
+  map map;
+  numbers numbers;
+  aluCompute aluCompute;
+  animation animation(.clk(clk),.rst(rst));
+  const HALFGAME = 3;
+  var i;
+  var j;
+  
+  
+  
+   
+
+  always {
+    gclk.d = gclk.q +1;
+    outred = {b0000000,b0000000,b0000000,b0000000,b0000000};
+    outgreen = {b0000000,b0000000,b0000000,b0000000,b0000000};
+    selectHelper.inp = 0;
+    fasterselectHelper.inp = 0;
+    outscores = scores.q;
+    outtime = 0;
+    map.number = map_number.q;
+    start_row = map.start_row;
+    start_col = map.start_col;
+    end_row = map.end_row;
+    end_col = map.end_col;
+    bound_left = map.bound_left;
+    bound_right = map.bound_right;
+    bound_up = map.bound_up;
+    bound_down = map.bount_down;
+    numbers.round = 0;
+    timer.settozero = 0;
+    aluCompute.mode = 6h00;
+    aluCompute.a = 8h00;
+    aluCompute.b = 8h00;
+    
+    
+    
+    if (state.q == state.START) {
+      //outred = {b0110110,b1001001,b1001001,b1001001,b1001001};
+      outred = animation.out_mine;
+      scores.d = 0;
+      usedmap.d = 0;
+      if (confirm && gclk.q > 10000000) {
+        timer.settozero = 1;
+        state.d = state.SHOWROUND;
+        round.d = 0;
+      }
+    } else if (state.q == state.SHOWROUND) {
+      //show the number
+      numbers.round = round.q + 1;
+      outred = numbers.out;
+      if (timer.out == 20) {          //when it's 2s
+        state.d = state.SHOWMINE;
+        if (round.q >= HALFGAME) {
+          map_number.d = 32+gclk.q[3:0];   //!!!
+          if (usedmap.q[32+gclk.q[3:0]] == 1) map_number.d = 32;
+          usedmap.d[32+gclk.q[3:0]] = 1;
+        } else {
+          map_number.d = gclk.q[3:0];
+          if (usedmap.q[gclk.q[3:0]] == 1) map_number.d = 0;
+          usedmap.d[gclk.q[3:0]] = 1;
+        }
+        timer.settozero = 1;
+      }
+    } else if (state.q == state.SHOWMINE) {
+        outred = map.map_mine;
+        if (round.q < HALFGAME) { 
+          outred = map.map_mine | map.boundary;
+        }
+        aluCompute.mode = 6h33;          //CMPEQ
+        aluCompute.a = timer.out;
+        aluCompute.b = 20;
+        if (aluCompute.out) {
+          state.d = state.RUNNING;
+          now_position_row.d = start_row;
+          now_position_col.d = start_col;
+          leftMines.d =  map.map_bonus;
+          path.d = {b0000000,b0000000,b0000000,b0000000,b0000000};
+          timer.settozero = 1;
+        }
+    } else if (state.q == state.RUNNING)  {
+      aluCompute.mode = 6h01;      //SUB
+      aluCompute.a = 199;
+      aluCompute.b = timer.out;
+      outtime = aluCompute.out;    //20s for 1 round
+      if (aluCompute.out == 0) {
+        state.d = state.FAIL;
+        timer.settozero = 1;
+        counter_failscreen.d = 0;
+      }
+      if (up) {
+        if (now_position_row.q < bound_up && path.q[now_position_row.q + 1][now_position_col.q] == 0) {
+          path.d[now_position_row.q][now_position_col.q] = 1;
+          now_position_row.d = now_position_row.q + 1;
+        }
+      }
+      if (down) {
+        if (now_position_row.q > bound_down && path.q[now_position_row.q-1][now_position_col.q] == 0) {
+          path.d[now_position_row.q][now_position_col.q] = 1;
+          now_position_row.d = now_position_row.q - 1;
+        }
+      }
+      if (left) {
+        if (now_position_col.q < bound_left && path.q[now_position_row.q][now_position_col.q + 1] ==0) {
+          path.d[now_position_row.q][now_position_col.q] = 1;
+          now_position_col.d = now_position_col.q + 1;
+        }
+      }
+      if (right) {
+        if (now_position_col.q > bound_right && path.q[now_position_row.q][now_position_col.q -1] == 0) {   
+          path.d[now_position_row.q][now_position_col.q] = 1;
+          now_position_col.d = now_position_col.q - 1;
+        }
+      }
+      if (myreset) {
+        now_position_row.d = map.start_row;
+        now_position_col.d = map.start_col;
+        leftMines.d = map.map_bonus;
+        path.d = {b0000000,b0000000,b0000000,b0000000,b0000000};
+      }
+      
+      if (map.map_mine[now_position_row.q][now_position_col.q] == 1) {
+        state.d = state.FAIL;
+        timer.settozero = 1;
+        counter_failscreen.d = 0;
+      } else if (now_position_row.q == end_row && now_position_col.q == end_col){
+        scores.d = scores.q + (199 - timer.out); 
+        if (round.q < (2*HALFGAME-1)) {
+          state.d = state.ROUNDSUC;
+          round.d = round.q + 1;
+          timer.settozero = 1;
+        } else {
+          state.d = state.FINALSUCCESS;
+          timer.settozero = 1;
+        }
+      }
+      
+      if (leftMines.q[now_position_row.q][now_position_col.q] == 1) {
+        leftMines.d[now_position_row.q][now_position_col.q] = 0;
+        //calculate score
+        scores.d = scores.q + (199 - timer.out); 
+      }
+      
+      //output to led
+      outred = path.q;
+      if (round.q<HALFGAME) {
+        outred = path.q | map.boundary;
+      }
+      outred[end_row][end_col] = 1;
+
+      
+      outgreen = leftMines.q;
+      selectHelper.inp = 1;
+      outgreen[now_position_row.q][now_position_col.q] = selectHelper.out;
+      outgreen[end_row][end_col] = 1;
+     
+   
+          
+    } else if (state.q == state.FAIL) {      //fail state
+      aluCompute.mode = 6h35;   //CMPLT
+      aluCompute.a = counter_failscreen.q;
+      aluCompute.b = 7;
+      if (aluCompute.out) {   //if (counter_failscreen.q < 7)
+        outgreen[now_position_row.q][now_position_col.q] = 1;
+        outred = map.map_mine;
+        if (round.q<HALFGAME) {
+          outred = map.map_mine | map.boundary;
+        }
+        outred[now_position_row.q][now_position_col.q] = 0;
+        fasterselectHelper.inp = map.map_mine[now_position_row.q][now_position_col.q];
+        if (fasterselectHelper.out) {
+          outgreen[now_position_row.q][now_position_col.q] = 0;
+          outred[now_position_row.q][now_position_col.q] = 1;    
+        }
+        if (timer.out == 8) {            //each 0.8s one more red line
+          timer.settozero = 1;
+          counter_failscreen.d = counter_failscreen.q + 1;
+        }
+        for (i = 0; i < counter_failscreen.q; i++) {   //show the redline
+          for (j = 0; j< 5; j++) {
+            outred[j][6-i] = 1;
+          }
+        }
+      } else {
+        outred = {b1111111,b1111111,b1111111,b1111111,b1111111};
+      }
+      if (confirm) {
+        state.d = state.START;
+        timer.settozero = 1;
+      }
+      
+    } else if (state.q == state.ROUNDSUC) {
+      outgreen = {b0000001,b0000010,b1000100,b0101000,b0010000};
+       if (confirm) {
+        state.d = state.SHOWROUND;
+        timer.settozero = 1;
+        
+      }
+    
+    } else if (state.q == state.FINALSUCCESS) {
+      outgreen = animation.out_win;
+        if (confirm) {
+        state.d = state.START;
+        timer.settozero = 1;
+      }
+    }
+  }
+}

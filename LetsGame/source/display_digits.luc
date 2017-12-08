@@ -1,0 +1,45 @@
+module display_digits (
+    input clk,  // clock
+    input rst,  // reset
+    input scores[$clog2(9999)],
+    input timeinp[$clog2(199)],
+    output digitout_score[8],
+    output selectdigit_score[4],
+    output digitout_time_ge[8],   //remember the pin should be in (pin7 pin6 pin5)
+    output digitout_time_shi[8]
+    
+  ) {
+  const FLIP = 16;
+  counter counter_score (.clk(clk),.rst(rst),#SIZE(2), #DIV(FLIP), #TOP(3));   //for scores, we use 4digits led, 
+                                                                               //but for time, we use two seperate digets
+  sig raw_score[4][4];
+  sig raw_time[3][4];
+  bin_to_dec convert1(#DIGITS(4),#LEADING_ZEROS(1));
+  bin_to_dec convert2(#DIGITS(3),#LEADING_ZEROS(1));
+  
+  seven_seg numbers_score;
+  seven_seg numbers_time_ge;
+  seven_seg numbers_time_shi;
+   
+
+  always {
+    digitout_score = b00000000;
+    selectdigit_score = b1111;
+    digitout_time_ge = b00000000;
+    digitout_time_shi = b00000000;
+    convert1.value = scores;
+    convert2.value = timeinp;
+    raw_score = convert1.digits;
+    raw_time = convert2.digits;
+    numbers_score.char = raw_score[counter_score.value];
+    digitout_score[6:0] = numbers_score.segs;
+    selectdigit_score[counter_score.value] = 0;
+    
+    numbers_time_ge.char = raw_time[1];
+    digitout_time_ge[6:0] = numbers_time_ge.segs;
+    numbers_time_shi.char = raw_time[2];
+    digitout_time_shi[6:0] = numbers_time_shi.segs;
+    
+    
+  }
+}
